@@ -399,9 +399,7 @@ create_queues(mars_params :: MARSParams) = ccall(
 Destroy the queues and free the memory allocated on the Pascal side.
 """
 destroy_queues(queues :: PQueues, mars_params :: MARSParams) = ccall(
-    p_DestroyQueues, Cvoid,
-    (PQueues, PMARSParams),
-    p_queues, Ref(mars_params)
+    p_DestroyQueues, Cvoid, (PQueues, PMARSParams), queues, Ref(mars_params)
 )
 
 """
