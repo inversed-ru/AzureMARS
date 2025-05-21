@@ -1,0 +1,7 @@
+       ORG          0
+       SEQ.I  $    40, $   -35     
+       MUL.AB #   -33, >     2     
+       MOV.I  }   -27, {     1     
+       MOV.I  <    33, }    -1     
+       DJN.I  $    -2, >    19     
+       END

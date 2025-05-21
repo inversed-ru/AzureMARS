@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.B  #   -23, {     0     
+       MOV.I  }    -7, {     0     
+       MOV.I  >   -22, {    -2     
+       MOV.I  #     5, }     1     
+       DJN.B  <     9, }    31     
+       END

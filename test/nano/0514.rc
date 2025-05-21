@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.I  #    35, @   -19     
+       MOV.I  }    -3, }     2     
+       MOV.I  *    12, {    -2     
+       DJN.I  <    38, >     1     
+       JMZ.B  *     2, $   -22     
+       END

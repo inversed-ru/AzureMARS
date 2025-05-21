@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.BA #    -6, <   -29     
+       MOV.I  #     8, }     8     
+       MOV.I  <    -2, {    -2     
+       MOV.I  {    -3, <    -3     
+       DJN.F  $    -2, <    27     
+       END

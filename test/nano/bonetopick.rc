@@ -1,0 +1,7 @@
+       ORG          0
+       MOV.I  <    -2, <    38     
+       MOV.I  #     3, >   -15     
+       SPL.F  $    -2, >    21     
+       SPL.F  $    -3, >    37     
+       MOV.I  #    16, $     1     
+       END

@@ -1,0 +1,7 @@
+       ORG          0
+       MOV.AB #     8, #     8     
+       MOV.I  <    -1, {     2     
+       JMN.B  $    -1, $    -2     
+       SPL.B  $    35, <   -10     
+       DJN.F  $    -4, <    30     
+       END

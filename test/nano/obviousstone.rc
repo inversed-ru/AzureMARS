@@ -1,0 +1,6 @@
+       ORG          0
+       SPL.B  #    34, {   -34     
+       ADD.F  $    -1, $     1     
+       MOV.I  <     0, $     0     
+       DJN.F  $    -2, {    -3     
+       END

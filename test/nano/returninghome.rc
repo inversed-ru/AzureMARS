@@ -1,0 +1,7 @@
+       ORG          0
+       MOV.I  >   -38, $    16     
+       MOV.I  >    39, $    35     
+       CMP.I  <     2, <     2     
+       MOV.I  *     2, >     1     
+       JMP.X  $    -2, {   -12     
+       END

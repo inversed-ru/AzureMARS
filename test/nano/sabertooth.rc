@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.F  #     9, }     0     
+       MOV.I  >     3, }    -1     
+       MOV.I  >   -22, >     2     
+       JMP.I  $    -2, }    -1     
+       SPL.X  }     0, }    24     
+       END

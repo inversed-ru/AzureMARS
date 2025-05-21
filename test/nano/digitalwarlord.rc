@@ -1,0 +1,7 @@
+       ORG          0
+       MOV.I  >    30, $    10     
+       SEQ.I  $    -6, $   -11     
+       MOV.AB #    -6, $     1     
+       MOV.I  >   -37, $   -17     
+       DJN.F  <     0, >     0     
+       END

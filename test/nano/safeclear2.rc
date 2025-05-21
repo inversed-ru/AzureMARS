@@ -1,0 +1,5 @@
+       ORG          0
+       SPL.B  #     0, }     1     
+       MOV.I  *     2, }     0     
+       DAT.F  $     0, }    -1     
+       END

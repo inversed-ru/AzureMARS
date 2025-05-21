@@ -1,0 +1,6 @@
+       ORG          0
+       JMZ.B  $     0, {     3     
+       MOV.I  $     0, }     2     
+       SPL.B  $    -1, }    -1     
+       JMP.B  $    -4, >    30     
+       END

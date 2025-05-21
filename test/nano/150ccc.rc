@@ -1,0 +1,6 @@
+       ORG          0
+       SNE.I  <     3, <     3     
+       JMZ.F  $    -1, <     2     
+       MOV.I  $     2, >     1     
+       JMP.B  $    -3, $    -3     
+       END

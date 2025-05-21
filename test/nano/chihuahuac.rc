@@ -1,0 +1,6 @@
+       ORG          0
+       SPL.B  #     0, $     0     
+       SPL.B  @     0, >    28     
+       MOV.I  }    -1, >    -1     
+       MOV.I  #     1, $    27     
+       END

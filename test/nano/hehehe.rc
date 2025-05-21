@@ -1,0 +1,6 @@
+       ORG          1
+       DAT.F  #     1, $     5     
+       SPL.B  #     4, $     5     
+       MOV.I  *    -2, >    -2     
+       JMP.B  $    -1, $     0     
+       END

@@ -1,0 +1,7 @@
+       ORG          0
+       MOV.I  $     4, $     5     
+       ADD.AB #     4, $    -1     
+       DJN.B  $    -2, #    17     
+       JMP.B  #     0, >   -13     
+       MOV.I  #     0, $     1     
+       END

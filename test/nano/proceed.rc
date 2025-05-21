@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.AB #    38, >    30     
+       MOV.I  >   -23, {    -1     
+       MOV.I  #    39, >    -8     
+       SPL.I  {     2, >    18     
+       MOV.I  #   -39, }     1     
+       END

@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.B  #    -1, $    -5     
+       MOV.I  *     3, <     3     
+       DJN.F  $    -1, <    -7     
+       DAT.F  $    -4, $    -5     
+       DAT.F  $    -4, $   -30     
+       END

@@ -1,0 +1,6 @@
+       ORG          1
+       ADD.AB #    28, $     1     
+       MOV.I  $     2, $    29     
+       JMP.B  $    -2, $     0     
+       MOV.I  $     0, $     1     
+       END

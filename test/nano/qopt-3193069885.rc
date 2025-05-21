@@ -1,0 +1,7 @@
+       ORG          0
+       ADD.AB #   -22, #     4     
+       JMZ.A  $    -1, >    -1     
+       SPL.A  #    22, *   -39     
+       MOV.I  {    -2, <    -3     
+       DJN.A  $    -1, }    -3     
+       END

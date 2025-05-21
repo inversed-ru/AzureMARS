@@ -1,0 +1,7 @@
+       ORG          0
+       SNE.I  $    -5, $   -10     
+       SEQ.I  {     1, $    12     
+       MUL.AB #    17, $     1     
+       MOV.I  >   -35, $   -19     
+       DJN.F  <     0, >     0     
+       END

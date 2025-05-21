@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.B  #     4, #    -4     
+       MOV.I  $    -2, $   -13     
+       ADD.F  $    -2, $     1     
+       MOV.I  $     0, $    -3     
+       JMP.B  $    -2, <    -3     
+       END

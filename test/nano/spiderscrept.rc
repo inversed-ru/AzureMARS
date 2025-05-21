@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.A  #     0, <    17     
+       MOV.I  }    -1, }     1     
+       SPL.BA <   -27, >   -16     
+       MOV.I  *    31, <    -8     
+       DJN.F  $    -1, <   -34     
+       END

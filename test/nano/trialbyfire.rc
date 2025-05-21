@@ -1,0 +1,6 @@
+       ORG          1
+       ADD.AB #     6, #    10     
+       JMZ.F  $    -1, <    -1     
+       MOV.I  >     1, @    -2     
+       DJN.F  $    -2, <   -13     
+       END

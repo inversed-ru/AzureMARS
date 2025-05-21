@@ -1,0 +1,6 @@
+       ORG          1
+       SPL.B  $   -23, $     0     
+       SPL.B  $    -1, $     0     
+       SPL.B  $    28, $     0     
+       MOV.I  #    27, *     0     
+       END

@@ -1,0 +1,6 @@
+       ORG          0
+       MOV.I  {    20, {    10     
+       DJN.F  #    40, <    -4     
+       MOV.I  $     2, <    -4     
+       JMP.B  {     1, }     1     
+       END

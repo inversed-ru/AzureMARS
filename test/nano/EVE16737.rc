@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.B  #     0, }    35     
+       SPL.B  #     0, }    17     
+       MOV.I  #   -23, }     1     
+       MOV.I  #   -22, }     1     
+       DJN.F  $    38, {    30     
+       END

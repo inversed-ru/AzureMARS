@@ -1,0 +1,7 @@
+       ORG          0
+       MOV.I  $     2, $    30     
+       MOV.I  #     1, <     1     
+       SPL.B  $    28, $    20     
+       SPL.B  $    -2, <   -27     
+       MOV.I  #     5, $    27     
+       END

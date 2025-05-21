@@ -1,0 +1,6 @@
+       ORG          0
+       ADD.AB #     4, $     3     
+       MOV.I  $     2, @     2     
+       SPL.B  $    -2, $     0     
+       DAT.F  #     0, #     0     
+       END

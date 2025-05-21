@@ -1,0 +1,6 @@
+       ORG          0
+       SPL.B  $     2, <    13     
+       DJN.F  #     0, <    -3     
+       SPL.B  #     0, <   -17     
+       DJN.F  #     0, <    -5     
+       END

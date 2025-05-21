@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.AB #     0, }    32     
+       SPL.B  $    -2, <    -2     
+       MOV.I  }    -2, }    -1     
+       MOV.I  #     2, <   -37     
+       DJN.X  $    -2, <    -3     
+       END

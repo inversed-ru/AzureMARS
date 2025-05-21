@@ -1,0 +1,7 @@
+       ORG          1
+       SUB.AB #     5, $     1     
+       JMZ.F  $    -1, $   -13     
+       MOV.I  #     9, >    -1     
+       DJN.F  $    -2, <   -11     
+       MOV.I  #   -18, $     1     
+       END

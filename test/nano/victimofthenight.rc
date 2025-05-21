@@ -1,0 +1,7 @@
+       ORG          1
+       ADD.AB #    -6, $     3     
+       JMZ.F  $    -1, >     2     
+       SPL.B  #     0, $     0     
+       MOV.I  <    32, $   -16     
+       DJN.F  {     0, }     0     
+       END

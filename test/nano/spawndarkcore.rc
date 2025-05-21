@@ -1,0 +1,7 @@
+       ORG          3
+       SPL.B  #    40, >   -39     
+       MOV.I  >   -22, $    -6     
+       DJN.F  <     0, >     0     
+       SPL.B  $    -3, >   -35     
+       MOV.I  #     1, $     1     
+       END

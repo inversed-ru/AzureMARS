@@ -1,0 +1,7 @@
+       ORG          2
+       MOV.I  >   -20, $    -6     
+       DJN.F  <     0, >     0     
+       SPL.B  $    -2, >   -30     
+       MOV.I  >    35, $   -36     
+       DJN.F  <     0, >     0     
+       END

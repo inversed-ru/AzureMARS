@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.B  #     9, }     0     
+       MOV.I  $     3, }    -1     
+       MOV.I  $     2, }    -2     
+       DJN.F  $    -2, }    -3     
+       MOV.I  $     5, $    -1     
+       END

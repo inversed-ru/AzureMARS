@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.B  $     1, {    11     
+       SPL.B  $     5, #     0     
+       MOV.I  >    -1, }    -1     
+       MOV.I  {   -23, {   -10     
+       JMP.B  $    -4, <    -3     
+       END

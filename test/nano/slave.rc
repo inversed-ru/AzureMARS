@@ -1,0 +1,6 @@
+       ORG          1
+       MOV.I  #     1, *     0     
+       ADD.AB #    13, $     2     
+       MOV.I  $    -2, <     1     
+       DJN.F  $    -2, <   -18     
+       END

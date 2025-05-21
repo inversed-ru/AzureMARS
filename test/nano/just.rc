@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.A  #   -24, >    22     
+       MOV.I  $     1, <     1     
+       MOV.I  >   -22, >    19     
+       MOV.I  *    -6, {     0     
+       DJN.I  $    -1, {    -4     
+       END

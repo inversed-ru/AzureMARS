@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.B  #   -29, >    23     
+       MOV.I  $     3, <     2     
+       MOV.I  $     2, <     1     
+       DJN.B  $    -2, #   -18     
+       DAT.F  {    12, {    -6     
+       END

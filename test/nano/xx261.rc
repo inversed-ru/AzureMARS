@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.B  #    -9, {     1     
+       MOV.I  }    28, {    -1     
+       DJN.F  @    -1, <     5     
+       SUB.A  {    16, <     7     
+       DJN.F  @     4, *     5     
+       END

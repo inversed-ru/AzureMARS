@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.B  #     0, }    26     
+       SPL.B  #     0, }   -38     
+       MOV.I  #    -9, }     1     
+       SPL.B  @   -36, >    20     
+       MOV.I  *   -12, {     0     
+       END

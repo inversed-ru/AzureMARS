@@ -1,0 +1,6 @@
+       ORG          0
+       JMZ.F  #    -2, {     0     
+       SPL.B  #     0, $     0     
+       MOV.I  $    -3, {    -2     
+       DJN.B  $    -1, }   -25     
+       END

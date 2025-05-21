@@ -1,0 +1,7 @@
+       ORG          2
+       ADD.AB #     5, #    11     
+       MOV.I  #     1, >    -1     
+       JMZ.F  $    -2, @    -2     
+       SPL.B  $    -2, {   -10     
+       MOV.I  #     1, $     1     
+       END

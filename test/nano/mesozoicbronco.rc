@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.AB #     1, >   -22     
+       SPL.AB #   -33, >   -36     
+       MOV.I  }   -17, {     0     
+       MOV.I  #   -12, }     1     
+       JMP.A  {    18, <    -3     
+       END

@@ -1,0 +1,6 @@
+       ORG          0
+       MOV.I  {    34, >    29     
+       MOV.I  {     9, }    -1     
+       MOV.I  >    21, }    -1     
+       DJN.I  $    -2, }    -3     
+       END

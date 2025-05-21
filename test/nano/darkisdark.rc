@@ -1,0 +1,7 @@
+       ORG          3
+       SPL.B  #   -31, >   -24     
+       MOV.I  #     1, }     1     
+       DJN.X  }    17, <    -7     
+       SPL.B  $    -3, <    27     
+       MOV.I  #     1, $     1     
+       END

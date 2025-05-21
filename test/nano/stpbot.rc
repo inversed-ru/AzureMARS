@@ -1,0 +1,5 @@
+       ORG          0
+       MOV.I  $     2, {    -5     
+       JMP.B  $    -1, $     0     
+       DAT.F  $     0, {    -5     
+       END

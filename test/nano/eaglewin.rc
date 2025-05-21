@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.AB #   -30, >   -20     
+       MOV.I  *     3, {    -4     
+       MOV.I  >    12, {    -2     
+       DJN.I  $    -2, $    -3     
+       DJN.I  #    -7, {    -4     
+       END

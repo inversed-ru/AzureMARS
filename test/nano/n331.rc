@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.B  #     0, >    31     
+       MOV.I  }    -1, }     1     
+       SPL.B  <   -38, >   -21     
+       MOV.AB #    40, }    16     
+       MOV.AB #   -37, }     2     
+       END

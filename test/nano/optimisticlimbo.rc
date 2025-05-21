@@ -1,0 +1,7 @@
+       ORG          0
+       SPL.AB #   -28, >    24     
+       MOV.I  }    -6, {     0     
+       MOV.I  >   -27, {    -2     
+       DJN.X  $    -2, $    -3     
+       JMZ.X  *    26, *    11     
+       END
