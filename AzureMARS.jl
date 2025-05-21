@@ -63,7 +63,7 @@ export Instruction, Operation, Modifier, AddrMode, Score, MARSParams, Warrior
 export play_match_random, play_match_permute
 export init_mars, load_warrior, create_queues, destroy_queues
 
-const mars = dlopen("./AzureMARS.dll")
+const mars = dlopen("./AzureMARS." * dlext)
 const p_LoadWarrior         = dlsym(mars, :LoadWarrior)
 const p_FreeWarrior         = dlsym(mars, :FreeWarrior)
 const p_FreeString          = dlsym(mars, :FreeString)
