@@ -92,6 +92,7 @@ type
       record
       A, B, I              :  TInstruction;
       AddrA, AddrB, AddrI  :  Int64;
+      AddrDec, AddrInc     :  Int64;
       end;
 
    PCore = ^TInstruction;
@@ -476,6 +477,7 @@ procedure EvalRegAi(
       amAPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].AField := ModTable[Core[Regs.AddrA].AField - 1];
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].AField];
          Regs.A := Core[Regs.AddrA];
@@ -484,6 +486,7 @@ procedure EvalRegAi(
       amAPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          AddrInc := Regs.AddrA;
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].AField];
          Regs.A := Core[Regs.AddrA];
@@ -500,6 +503,7 @@ procedure EvalRegAi(
       amBPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].BField := ModTable[Core[Regs.AddrA].BField - 1];
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].BField];
          Regs.A := Core[Regs.AddrA];
@@ -508,6 +512,7 @@ procedure EvalRegAi(
       amBPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          AddrInc := Regs.AddrA;
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].BField];
          Regs.A := Core[Regs.AddrA];
@@ -545,6 +550,7 @@ procedure EvalRegBi(
       amAPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].AField := ModTable[Core[Regs.AddrB].AField - 1];
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].AField];
          Regs.B := Core[Regs.AddrB];
@@ -553,6 +559,7 @@ procedure EvalRegBi(
       amAPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          AddrInc := Regs.AddrB;
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].AField];
          Regs.B := Core[Regs.AddrB];
@@ -569,6 +576,7 @@ procedure EvalRegBi(
       amBPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].BField := ModTable[Core[Regs.AddrB].BField - 1];
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].BField];
          Regs.B := Core[Regs.AddrB];
@@ -577,6 +585,7 @@ procedure EvalRegBi(
       amBPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          AddrInc := Regs.AddrB;
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].BField];
          Regs.B := Core[Regs.AddrB];
@@ -614,6 +623,7 @@ procedure EvalRegAa(
       amAPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].AField := ModTable[Core[Regs.AddrA].AField - 1];
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].AField];
          Regs.A.AField := Core[Regs.AddrA].AField;
@@ -622,6 +632,7 @@ procedure EvalRegAa(
       amAPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          AddrInc := Regs.AddrA;
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].AField];
          Regs.A.AField := Core[Regs.AddrA].AField;
@@ -638,6 +649,7 @@ procedure EvalRegAa(
       amBPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].BField := ModTable[Core[Regs.AddrA].BField - 1];
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].BField];
          Regs.A.AField := Core[Regs.AddrA].AField;
@@ -646,6 +658,7 @@ procedure EvalRegAa(
       amBPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          AddrInc := Regs.AddrA;
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].BField];
          Regs.A.AField := Core[Regs.AddrA].AField;
@@ -683,6 +696,7 @@ procedure EvalRegBa(
       amAPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].AField := ModTable[Core[Regs.AddrB].AField - 1];
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].AField];
          Regs.B.AField := Core[Regs.AddrB].AField;
@@ -691,6 +705,7 @@ procedure EvalRegBa(
       amAPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          AddrInc := Regs.AddrB;
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].AField];
          Regs.B.AField := Core[Regs.AddrB].AField;
@@ -707,6 +722,7 @@ procedure EvalRegBa(
       amBPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].BField := ModTable[Core[Regs.AddrB].BField - 1];
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].BField];
          Regs.B.AField := Core[Regs.AddrB].AField;
@@ -715,6 +731,7 @@ procedure EvalRegBa(
       amBPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          AddrInc := Regs.AddrB;
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].BField];
          Regs.B.AField := Core[Regs.AddrB].AField;
@@ -752,6 +769,7 @@ procedure EvalRegAb(
       amAPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].AField := ModTable[Core[Regs.AddrA].AField - 1];
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].AField];
          Regs.A.BField := Core[Regs.AddrA].BField;
@@ -760,6 +778,7 @@ procedure EvalRegAb(
       amAPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          AddrInc := Regs.AddrA;
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].AField];
          Regs.A.BField := Core[Regs.AddrA].BField;
@@ -776,6 +795,7 @@ procedure EvalRegAb(
       amBPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].BField := ModTable[Core[Regs.AddrA].BField - 1];
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].BField];
          Regs.A.BField := Core[Regs.AddrA].BField;
@@ -784,6 +804,7 @@ procedure EvalRegAb(
       amBPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          AddrInc := Regs.AddrA;
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].BField];
          Regs.A.BField := Core[Regs.AddrA].BField;
@@ -822,6 +843,7 @@ procedure EvalRegBb(
       amAPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].AField := ModTable[Core[Regs.AddrB].AField - 1];
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].AField];
          Regs.B.BField := Core[Regs.AddrB].BField;
@@ -830,6 +852,7 @@ procedure EvalRegBb(
       amAPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          AddrInc := Regs.AddrB;
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].AField];
          Regs.B.BField := Core[Regs.AddrB].BField;
@@ -846,6 +869,7 @@ procedure EvalRegBb(
       amBPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].BField := ModTable[Core[Regs.AddrB].BField - 1];
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].BField];
          Regs.B.BField := Core[Regs.AddrB].BField;
@@ -854,6 +878,7 @@ procedure EvalRegBb(
       amBPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          AddrInc := Regs.AddrB;
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].BField];
          Regs.B.BField := Core[Regs.AddrB].BField;
@@ -894,6 +919,7 @@ procedure EvalRegAf(
       amAPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].AField := ModTable[Core[Regs.AddrA].AField - 1];
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].AField];
          Regs.A.AField := Core[Regs.AddrA].AField;
@@ -903,6 +929,7 @@ procedure EvalRegAf(
       amAPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          AddrInc := Regs.AddrA;
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].AField];
          Regs.A.AField := Core[Regs.AddrA].AField;
@@ -921,6 +948,7 @@ procedure EvalRegAf(
       amBPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].BField := ModTable[Core[Regs.AddrA].BField - 1];
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].BField];
          Regs.A.AField := Core[Regs.AddrA].AField;
@@ -930,6 +958,7 @@ procedure EvalRegAf(
       amBPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          AddrInc := Regs.AddrA;
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].BField];
          Regs.A.AField := Core[Regs.AddrA].AField;
@@ -971,6 +1000,7 @@ procedure EvalRegBf(
       amAPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].AField := ModTable[Core[Regs.AddrB].AField - 1];
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].AField];
          Regs.B.AField := Core[Regs.AddrB].AField;
@@ -980,6 +1010,7 @@ procedure EvalRegBf(
       amAPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          AddrInc := Regs.AddrB;
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].AField];
          Regs.B.AField := Core[Regs.AddrB].AField;
@@ -998,6 +1029,7 @@ procedure EvalRegBf(
       amBPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].BField := ModTable[Core[Regs.AddrB].BField - 1];
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].BField];
          Regs.B.AField := Core[Regs.AddrB].AField;
@@ -1007,6 +1039,7 @@ procedure EvalRegBf(
       amBPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          AddrInc := Regs.AddrB;
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].BField];
          Regs.B.AField := Core[Regs.AddrB].AField;
@@ -1038,6 +1071,7 @@ procedure EvalAddrA(
       amAPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].AField := ModTable[Core[Regs.AddrA].AField - 1];
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].AField];
          end;
@@ -1045,6 +1079,7 @@ procedure EvalAddrA(
       amAPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          AddrInc := Regs.AddrA;
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].AField];
          Core[AddrInc].AField := ModTable[Core[AddrInc].AField + 1];
@@ -1059,6 +1094,7 @@ procedure EvalAddrA(
       amBPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].BField := ModTable[Core[Regs.AddrA].BField - 1];
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].BField];
          end;
@@ -1066,6 +1102,7 @@ procedure EvalAddrA(
       amBPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          AddrInc := Regs.AddrA;
          Regs.AddrA := ModTable[Regs.AddrA + Core[Regs.AddrA].BField];
          Core[AddrInc].BField := ModTable[Core[AddrInc].BField + 1];
@@ -1095,6 +1132,7 @@ procedure EvalAddrB(
       amAPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].AField := ModTable[Core[Regs.AddrB].AField - 1];
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].AField];
          end;
@@ -1102,6 +1140,7 @@ procedure EvalAddrB(
       amAPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          AddrInc := Regs.AddrB;
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].AField];
          Core[AddrInc].AField := ModTable[Core[AddrInc].AField + 1];
@@ -1116,6 +1155,7 @@ procedure EvalAddrB(
       amBPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].BField := ModTable[Core[Regs.AddrB].BField - 1];
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].BField];
          end;
@@ -1123,6 +1163,7 @@ procedure EvalAddrB(
       amBPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          AddrInc := Regs.AddrB;
          Regs.AddrB := ModTable[Regs.AddrB + Core[Regs.AddrB].BField];
          Core[AddrInc].BField := ModTable[Core[AddrInc].BField + 1];
@@ -1141,24 +1182,28 @@ procedure EvalNullA(
       amAPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].AField := ModTable[Core[Regs.AddrA].AField - 1];
          end;
 
       amAPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          Core[Regs.AddrA].AField := ModTable[Core[Regs.AddrA].AField + 1];
          end;
 
       amBPreDec:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrADec := Regs.AddrA;
          Core[Regs.AddrA].BField := ModTable[Core[Regs.AddrA].BField - 1];
          end;
 
       amBPostInc:
          begin
          Regs.AddrA := ModTable[Regs.AddrI + Regs.I.AField];
+         Regs.AddrAInc := Regs.AddrA;
          Core[Regs.AddrA].BField := ModTable[Core[Regs.AddrA].BField + 1];
          end;
    end;
@@ -1175,24 +1220,28 @@ procedure EvalNullB(
       amAPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].AField := ModTable[Core[Regs.AddrB].AField - 1];
          end;
 
       amAPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          Core[Regs.AddrB].AField := ModTable[Core[Regs.AddrB].AField + 1];
          end;
 
       amBPreDec:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBDec := Regs.AddrB;
          Core[Regs.AddrB].BField := ModTable[Core[Regs.AddrB].BField - 1];
          end;
 
       amBPostInc:
          begin
          Regs.AddrB := ModTable[Regs.AddrI + Regs.I.BField];
+         Regs.AddrBInc := Regs.AddrB;
          Core[Regs.AddrB].BField := ModTable[Core[Regs.AddrB].BField + 1];
          end;
    end;
@@ -2363,6 +2412,66 @@ procedure RunSimulation(
    Score.T += Ord((Queues[0].NProcs > 0) and (Queues[1].NProcs > 0));
    Score.Cycles += Cycles;
    end;
+   
+function SpacetimeDiagram(
+         Core              : PCore;
+         Queues            : PQueues;
+         SideToMove        : Int64;
+   var   MARSParams        : TMarsParams;
+   var   Score             : TScore
+         )                 : AnsiString; 
+   var
+         Cycle, Cycles     : Int64;
+         CurrentProc,
+         NextProc          : PProc;
+         Regs              : TRegisters;
+         qSideToMove,
+         qOtherSide        : PQueue;
+   begin
+   Cycles := MARSParams.MaxCycles;
+   ClearCore(Core, MARSParams.CoreSize);
+   for Cycle := 1 to MARSParams.MaxCycles do
+      begin     
+      CurrentProc := q.current;
+      NextProc := CurrentProc.Next;
+      Regs.AddrI := CurrentProc.Location;
+      Regs.I := Core[Regs.AddrI];
+      Regs.AddrADec := None;
+      Regs.AddrBDec := None;
+      Regs.AddrAInc := None;
+      Regs.AddrBInc := None;
+      ProcArr[Regs.I.Operation, Regs.I.modifier](
+         Core, q, CurrentProc, Regs, MARSParams
+      );
+      
+      // #TODO specific inc/dec, {}<>
+      if Regs.AddrADec <> None then
+         row[1 + Regs.AddrADec] := '-';
+      if Regs.AddrBDec <> None then
+         row[1 + Regs.AddrBDec] := '-';
+      if Regs.AddrAInc <> None then
+         row[1 + Regs.AddrAInc] := '+';
+      if Regs.AddrBInc <> None then
+         row[1 + Regs.AddrBInc] := '+';
+      row[Regs.AddrI] := '.';
+         
+      case Regs.I.Operation of
+         opMOV: row[1 + Regs.AddrB] := 'X';
+         opADD, opSUB, opMUL, opDIV, opMOD: row[1 + Regs.AddrB] := '*';
+         opJMZ, opJMN: row[1 + Regs.AddrB] := '?';
+         opDJN: row[1 + Regs.AddrB] := '-';
+         opSPL: row[1 + Regs.AddrA] := '!';
+         opSEQ, opSNE: 
+            begin
+            row[1 + Regs.AddrA] := '?';
+            row[1 + Regs.AddrB] := '?';
+            end;
+      end
+      if q.Nprocs = 0 then
+         break;
+      end;
+   end;
+
    
 {-----------------------<< Matches >>------------------------------------------}
    
