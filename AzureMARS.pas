@@ -2457,6 +2457,12 @@ function SpacetimeDiagram(
       );
       Queue.Current := NextProc;
       
+      // Mark current process and display the row
+      Row[1 + Regs.AddrI] := '@';
+      Str(Cycle - 1: 4, S);
+      WriteLn(S, '|', Row, '|');
+      Row[1 + Regs.AddrI] := '.';
+      
       // Increments / decrements #TODO specific inc / dec, {}<>
       if Regs.AddrADec <> None then
          Row[1 + Regs.AddrADec] := '-';
@@ -2480,12 +2486,6 @@ function SpacetimeDiagram(
             Row[1 + Regs.AddrB] := '?';
             end;
       end;
-      
-      // Mark current process and display the row
-      Row[1 + Regs.AddrI] := '@';
-      Str(Cycle: 4, S);
-      WriteLn(S, '|', Row, '|');
-      Row[1 + Regs.AddrI] := '.';
             
       if Queue.Nprocs = 0 then
          break;
