@@ -2460,7 +2460,7 @@ function SpacetimeDiagram(
       // Mark current process and display the row
       Row[1 + Regs.AddrI] := '@';
       Str(Cycle - 1: 4, S);
-      WriteLn(S, '|', Row, '|');
+      WriteLn(S, '|', Row, '| ', InstrToString(Regs.I));
       Row[1 + Regs.AddrI] := '.';
       
       // Increments / decrements #TODO specific inc / dec, {}<>
