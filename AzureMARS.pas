@@ -92,7 +92,8 @@ type
       record
       A, B, I              :  TInstruction;
       AddrA, AddrB, AddrI  :  Int64;
-      AddrDec, AddrInc     :  Int64;
+      AddrADec, AddrAInc,
+      AddrBDec, AddrBInc   :  Int64;
       end;
 
    PCore = ^TInstruction;
@@ -207,6 +208,12 @@ procedure LoadIntoCore(
 procedure ClearCore(
          Core        : PCore; 
          CoreSize    : Int64);
+         
+// Return the spacetime diagram of `Warrior`
+function SpacetimeDiagram(
+   var   Warrior     : TMARSWarrior;
+   var   MARSParams  : TMarsParams
+         )           : AnsiString; 
 
 { - - - - - - - - - - - << Output >> - - - - - - - - - - - - - - - - - - - - - }
 
@@ -246,7 +253,7 @@ procedure DestroyQueues(
    var   MARSParams  : TMARSParams);
 
 implementation
-uses SysUtils;
+uses SysUtils, StrUtils;
 {$ENDIF}
 
 {-----------------------<< Math >>---------------------------------------------}
@@ -2413,26 +2420,31 @@ procedure RunSimulation(
    Score.Cycles += Cycles;
    end;
    
+// Return the spacetime diagram of `Warrior`
 function SpacetimeDiagram(
-         Core              : PCore;
-         Queues            : PQueues;
-         SideToMove        : Int64;
-   var   MARSParams        : TMarsParams;
-   var   Score             : TScore
-         )                 : AnsiString; 
+   var   Warrior     : TMARSWarrior;
+   var   MARSParams  : TMarsParams
+         )           : AnsiString; 
    var
-         Cycle, Cycles     : Int64;
+         Cycle, None : Int64;
          CurrentProc,
-         NextProc          : PProc;
-         Regs              : TRegisters;
-         qSideToMove,
-         qOtherSide        : PQueue;
+         NextProc    : PProc;
+         Regs        : TRegisters;
+         Core        : array of TInstruction;
+         Queue       : TQueue;
+         Row, S      : AnsiString;
    begin
-   Cycles := MARSParams.MaxCycles;
-   ClearCore(Core, MARSParams.CoreSize);
+   SetLength(Core, MARSParams.CoreSize);
+   ClearCore(@Core[0], MARSParams.CoreSize);
+   AllocQueue(Queue, MARSParams);
+   LoadIntoCore(@(Core[0]), Queue, Warrior, 0, MARSParams);
+   Result := '';
+   Row := PadRight(DupeString('#', Warrior.Len), MARSParams.CoreSize);
+   None := High(None);
    for Cycle := 1 to MARSParams.MaxCycles do
-      begin     
-      CurrentProc := q.current;
+      begin    
+      // Execute the instruction
+      CurrentProc := Queue.Current;
       NextProc := CurrentProc.Next;
       Regs.AddrI := CurrentProc.Location;
       Regs.I := Core[Regs.AddrI];
@@ -2441,37 +2453,45 @@ function SpacetimeDiagram(
       Regs.AddrAInc := None;
       Regs.AddrBInc := None;
       ProcArr[Regs.I.Operation, Regs.I.modifier](
-         Core, q, CurrentProc, Regs, MARSParams
+         @Core[0], @Queue, CurrentProc, Regs, MARSParams
       );
+      Queue.Current := NextProc;
       
-      // #TODO specific inc/dec, {}<>
+      // Increments / decrements #TODO specific inc / dec, {}<>
+      Row[1 + Regs.AddrI] := '@';
       if Regs.AddrADec <> None then
-         row[1 + Regs.AddrADec] := '-';
+         Row[1 + Regs.AddrADec] := '-';
       if Regs.AddrBDec <> None then
-         row[1 + Regs.AddrBDec] := '-';
+         Row[1 + Regs.AddrBDec] := '-';
       if Regs.AddrAInc <> None then
-         row[1 + Regs.AddrAInc] := '+';
+         Row[1 + Regs.AddrAInc] := '+';
       if Regs.AddrBInc <> None then
-         row[1 + Regs.AddrBInc] := '+';
-      row[Regs.AddrI] := '.';
+         Row[1 + Regs.AddrBInc] := '+';
          
+      // Operation
       case Regs.I.Operation of
-         opMOV: row[1 + Regs.AddrB] := 'X';
-         opADD, opSUB, opMUL, opDIV, opMOD: row[1 + Regs.AddrB] := '*';
-         opJMZ, opJMN: row[1 + Regs.AddrB] := '?';
-         opDJN: row[1 + Regs.AddrB] := '-';
-         opSPL: row[1 + Regs.AddrA] := '!';
+         opMOV: Row[1 + Regs.AddrB] := 'X';
+         opADD, opSUB, opMUL, opDIV, opMOD: Row[1 + Regs.AddrB] := '*';
+         opJMZ, opJMN: Row[1 + Regs.AddrB] := '?';
+         opDJN: Row[1 + Regs.AddrB] := '-';
+         opSPL: Row[1 + Regs.AddrA] := '!';
          opSEQ, opSNE: 
             begin
-            row[1 + Regs.AddrA] := '?';
-            row[1 + Regs.AddrB] := '?';
+            Row[1 + Regs.AddrA] := '?';
+            Row[1 + Regs.AddrB] := '?';
             end;
-      end
-      if q.Nprocs = 0 then
+      end;
+      
+      // Display the row
+      Str(Cycle: 4, S);
+      WriteLn(S, '|', Row, '|');
+      Row[1 + Regs.AddrI] := '.';
+            
+      if Queue.Nprocs = 0 then
          break;
       end;
+   FreeQueue(Queue, MARSParams);
    end;
-
    
 {-----------------------<< Matches >>------------------------------------------}
    

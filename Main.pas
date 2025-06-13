@@ -276,18 +276,20 @@ procedure CheckMARSParams(
    end;
 
 var   
-   MARSParams  : TMARSParams;
-   Warriors    : TWarriors;
-   Core        : TCore;
-   Queues      : PQueues;
-   Score       : TScore;
-   NRounds, i  : Integer;
-   ErrorCode   : Word;
-   Arg         : AnsiString;
+   MARSParams        : TMARSParams;
+   Warriors          : TWarriors;
+   Core              : TCore;
+   Queues            : PQueues;
+   Score             : TScore;
+   NRounds, i,
+   ExpectedWarriors  : Integer;
+   ErrorCode         : Word;
+   ShowDiagram       : Boolean;
+   Arg               : AnsiString;
 const
-   Help        : AnsiString =
+   Help              : AnsiString =
       'AzureMARS 1.0 Core War simulator by inversed'        + LineEnding +
-      'Usage: AzureMARS [options] file1 file2'              + LineEnding +
+      'Usage: AzureMARS [options] file1 [file2]'            + LineEnding +
       'Options:'                                            + LineEnding +
       '  -r  Int   Number of rounds'                        + LineEnding +
       '  -s  Int   Core size'                               + LineEnding +
@@ -297,6 +299,7 @@ const
       '  -d  Int   Min. warriors distance'                  + LineEnding +
       '  -h  Str   Hill preset, one of nano, tiny, 94nop'   + LineEnding +
       '  -P        Permute starting positions'              + LineEnding +
+      '  -D        Display spacetime diagram'               + LineEnding +
       '  -Tp       Test performance'                        + LineEnding +
       '  -Tc       Test correctness';
 
@@ -311,6 +314,7 @@ i := 1;
 InitWarriors(Warriors);
 MARSParams := MARSParamsNull;
 NRounds := -1;
+ShowDiagram := False;
 while i <= ParamCount() do
    begin
    ErrorCode := 0;
@@ -360,6 +364,8 @@ while i <= ParamCount() do
          end;
       '-P': 
          NRounds := -1;
+      '-D':
+         ShowDiagram := True;
       '-Tp': 
          begin
          TestPerformance(
@@ -409,31 +415,41 @@ while i <= ParamCount() do
    Inc(i);
    end;
    
-if Warriors.N <> 2 then
+if ShowDiagram then
+   ExpectedWarriors := 1 else
+   ExpectedWarriors := 2;
+if Warriors.N <> ExpectedWarriors then
    begin
-   WriteLn('Expected 2 warrior files, got ', Warriors.N);
+   WriteLn('Expected ', ExpectedWarriors, ' warrior file(s), got ', Warriors.N);
    exit;
    end;
    
-RandSeed := 1;
-SetLength(Core, MARSParams.CoreSize);
-Queues := CreateQueues(MARSParams);
 InitMARS(MARSParams);
-if NRounds <= 0 then
-   PlayMatchPermute(
-      Warriors._[0], Warriors._[1], @Core[0], Queues, MARSParams, Score
-   )
+if ShowDiagram then
+   begin
+   WriteLn(SpacetimeDiagram(Warriors._[0], MARSParams));
+   end
 else
-   PlayMatchRandom(
-      Warriors._[0], Warriors._[1], @Core[0], Queues, MARSParams, NRounds, Score
+   begin
+   RandSeed := 1;
+   SetLength(Core, MARSParams.CoreSize);
+   Queues := CreateQueues(MARSParams);
+   if NRounds <= 0 then
+      PlayMatchPermute(
+         Warriors._[0], Warriors._[1], @Core[0], Queues, MARSParams, Score
+      )
+   else
+      PlayMatchRandom(
+         Warriors._[0], Warriors._[1], @Core[0], Queues, MARSParams, NRounds, Score
+      );
+   DestroyQueues(Queues, MARSParams);
+   WriteLn('Score1 Score2     W1     L1     T1');
+   WriteLn(
+      Score.Taken: 6 : 2, ' ',
+      Score.Given: 6 : 2, ' ',
+      Score.W : 6,        ' ',
+      Score.L : 6,        ' ',
+      Score.T : 6
    );
-DestroyQueues(Queues, MARSParams);
-WriteLn('Score1 Score2     W1     L1     T1');
-WriteLn(
-   Score.Taken: 6 : 2, ' ',
-   Score.Given: 6 : 2, ' ',
-   Score.W : 6,        ' ',
-   Score.L : 6,        ' ',
-   Score.T : 6
-);
+   end
 end.
